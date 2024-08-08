@@ -18,8 +18,10 @@ public class SecurityConfig {
         //h(cd)2
         http.csrf().disable().cors().disable(); //Authentication
 
-        //haap
-        http.authorizeHttpRequests().anyRequest().permitAll(); //Authorization
+        //harp
+        http.authorizeHttpRequests()
+                .requestMatchers("/api/v1/auth/login", "/api/v1/auth/addUser")
+                .permitAll().anyRequest().authenticated();
         return http.build();
     }
 }

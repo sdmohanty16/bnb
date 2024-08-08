@@ -19,8 +19,8 @@ public class AuthController {
         this.appUserService = appUserService;
     }
 
-    //http://localhost:8080/api/v1/auth
-    @PostMapping
+    //http://localhost:8080/api/v1/auth/addUser
+    @PostMapping("/addUser")
     public ResponseEntity<AppUserDto> createUser(
             @RequestBody AppUserDto appUserDto
     ){
@@ -43,4 +43,6 @@ public class AuthController {
             return new ResponseEntity<>("Invalid username/password", HttpStatus.UNAUTHORIZED);
         }
     }
+
+
 }
