@@ -45,5 +45,4 @@ public class JWTService {
         return decodedJWT.getClaim(USER_NAME).asString();
     }
 
-
 }

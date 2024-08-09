@@ -22,10 +22,10 @@ public class JWTFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         String token = request.getHeader("Authorization");
-        if(token!=null && token.startsWith("Bearer ")){
-            String tokenVal = token.substring(8, token.length()-1);
-            String username = jwtService.getUserName(tokenVal);
-            System.out.println(username);
+        if(token != null && token.startsWith("Bearer ")){
+            String tokenVal = token.substring(8, token.length() - 1);
+            String userName = jwtService.getUserName(tokenVal);
+            System.out.println(userName);
         }
     }
 }

@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/v1/dummy")
 public class DummyController {
 
-    //http://localhost:8080/api/v1/dummy
-    @GetMapping
+    //http://localhost:8080/api/v1/dummy/getMessage
+    @GetMapping("/getMessage")
     public String printMsg(){
         return "Hello Earth..";
     }
