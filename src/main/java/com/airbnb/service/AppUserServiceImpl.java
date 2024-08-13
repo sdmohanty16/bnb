@@ -40,6 +40,7 @@ public class AppUserServiceImpl implements AppUserService{
 
         String hashpw = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt(10));
         user.setPassword(hashpw);
+
         AppUser savedUser = appUserRepository.save(user);
         AppUserDto dto = mapToDto(savedUser);
         return dto;
@@ -64,6 +65,7 @@ public class AppUserServiceImpl implements AppUserService{
         entity.setEmail(dto.getEmail());
         entity.setUsername(dto.getUsername());
         entity.setPassword(dto.getPassword());
+        entity.setRole(dto.getRole());
         return entity;
     }
 
@@ -74,6 +76,7 @@ public class AppUserServiceImpl implements AppUserService{
         dto.setEmail(user.getEmail());
         dto.setUsername(user.getUsername());
         dto.setPassword(user.getPassword());
+        dto.setRole(user.getRole());
         return dto;
     }
 }

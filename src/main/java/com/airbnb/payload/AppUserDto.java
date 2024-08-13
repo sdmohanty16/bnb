@@ -13,6 +13,7 @@ public class AppUserDto {
     private String email;
     private String username;
     private String password;
+    private String role;
 
 
     public long getId() {
@@ -53,5 +54,13 @@ public class AppUserDto {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }
