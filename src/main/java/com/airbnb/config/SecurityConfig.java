@@ -33,7 +33,7 @@ public class SecurityConfig {
 
         http.addFilterBefore(jwtFilter, AuthorizationFilter.class);
         http.authorizeHttpRequests()
-                .requestMatchers("/api/v1/auth/createuser","/api/v1/auth/createpropertyowner")
+                .requestMatchers("/api/v1/auth/createuser","/api/v1/auth/createpropertyowner","/api/v1/auth/login")
                 .permitAll()
                 .requestMatchers("/api/v1/property/addProperty").hasRole("OWNER")
                 .requestMatchers("/api/v1/auth/createpropertymanager").hasRole("ADMIN")
