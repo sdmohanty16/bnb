@@ -35,8 +35,8 @@ public class SecurityConfig {
         http.authorizeHttpRequests()
                 .requestMatchers("/api/v1/auth/createuser","/api/v1/auth/createpropertyowner","/api/v1/auth/login")
                 .permitAll()
-                .requestMatchers("/api/v1/property/addProperty").hasRole("OWNER")
-                .requestMatchers("/api/v1/auth/createpropertymanager").hasRole("ADMIN")
+                .requestMatchers("/api/v1/property/addProperty","/api/v1/property/**").hasRole("OWNER")
+                .requestMatchers("/api/v1/auth/createpropertymanager","/api/v1/country/**","/api/v1/city/**").hasRole("ADMIN")
                 .anyRequest()
                 .authenticated();
 
