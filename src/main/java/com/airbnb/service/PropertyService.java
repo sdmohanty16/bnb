@@ -9,4 +9,5 @@ public interface PropertyService {
 
     PropertyDto addProperty(PropertyDto propertyDto, long cityid, long countryid);
 
+    public List<Property> searchProperty(String cityName);
 }

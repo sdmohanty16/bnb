@@ -34,6 +34,14 @@ public class PropertyController {
         return new ResponseEntity<>(addProperty, HttpStatus.CREATED);
     }
 
+    //http://localhost:8080/api/v1/property/propertyresult?city=
+    @GetMapping("/propertyresult")
+    public List<Property> searchProperty(
+            @RequestParam("city") String cityName
+    ){
+       return propertyService.searchProperty(cityName);
+    }
+
 
 
 }

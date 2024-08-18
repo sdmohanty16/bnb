@@ -32,13 +32,14 @@ public class SecurityConfig {
 
 
         http.addFilterBefore(jwtFilter, AuthorizationFilter.class);
-        http.authorizeHttpRequests()
-                .requestMatchers("/api/v1/auth/createuser","/api/v1/auth/createpropertyowner","/api/v1/auth/login")
-                .permitAll()
-                .requestMatchers("/api/v1/property/addProperty","/api/v1/property/**").hasRole("OWNER")
-                .requestMatchers("/api/v1/auth/createpropertymanager","/api/v1/country/**","/api/v1/city/**").hasRole("ADMIN")
-                .anyRequest()
-                .authenticated();
+        http.authorizeHttpRequests().anyRequest().permitAll();
+//        http.authorizeHttpRequests()
+//                .requestMatchers("/api/v1/auth/createuser","/api/v1/auth/createpropertyowner","/api/v1/auth/login")
+//                .permitAll()
+//                .requestMatchers("/api/v1/property/addProperty","/api/v1/property/**").hasRole("OWNER")
+//                .requestMatchers("/api/v1/auth/createpropertymanager","/api/v1/country/**","/api/v1/city/**").hasRole("ADMIN")
+//                .anyRequest()
+//                .authenticated();
 
         return http.build();
     }

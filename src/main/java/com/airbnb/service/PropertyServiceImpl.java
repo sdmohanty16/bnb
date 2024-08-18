@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class PropertyServiceImpl implements PropertyService{
@@ -46,6 +45,12 @@ public class PropertyServiceImpl implements PropertyService{
         Property savedProperty = propertyRepository.save(property);
         PropertyDto dto = mapToDto(savedProperty);
         return dto;
+    }
+
+    @Override
+    public List<Property> searchProperty(String cityName) {
+        List<Property> properties = propertyRepository.searchProperty(cityName);
+        return properties;
     }
 
 
