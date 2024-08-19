@@ -39,7 +39,16 @@ public class PropertyController {
     public List<Property> searchProperty(
             @RequestParam("city") String cityName
     ){
-       return propertyService.searchProperty(cityName);
+        return propertyService.searchProperty(cityName);
+    }
+
+    //http://localhost:8080/api/v1/property/delete?id=
+    @DeleteMapping("/delete")
+    public ResponseEntity<String> deleteProperty(
+            @RequestParam long id
+    ){
+        propertyService.deleteProperty(id);
+        return new ResponseEntity<>("Property deleted successfully..." , HttpStatus.OK);
     }
 
 

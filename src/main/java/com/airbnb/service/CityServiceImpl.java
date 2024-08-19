@@ -4,7 +4,9 @@ import com.airbnb.entity.City;
 import com.airbnb.exception.CityExists;
 import com.airbnb.payload.CityDto;
 import com.airbnb.repository.CityRepository;
+import com.airbnb.repository.PropertyRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -14,9 +16,11 @@ import java.util.stream.Collectors;
 public class CityServiceImpl implements CityService{
 
     private CityRepository cityRepository;
+    private PropertyRepository propertyRepository;
 
-    public CityServiceImpl(CityRepository cityRepository) {
+    public CityServiceImpl(CityRepository cityRepository, PropertyRepository propertyRepository) {
         this.cityRepository = cityRepository;
+        this.propertyRepository = propertyRepository;
     }
 
 
@@ -33,9 +37,12 @@ public class CityServiceImpl implements CityService{
         return dto;
     }
 
-    @Override
+    @Transactional
     public void deleteCity(long id) {
-        cityRepository.deleteById(id);
+        Optional<City> opId = cityRepository.findById(id);
+            Long cityid = opId.get().getId();
+            propertyRepository.deletePropertyByCityId(cityid);
+            cityRepository.deleteById(cityid);
     }
 
     @Override

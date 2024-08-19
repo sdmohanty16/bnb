@@ -5,6 +5,7 @@ import com.airbnb.payload.CityDto;
 import com.airbnb.service.CityService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -34,7 +35,7 @@ public class CityController {
         @RequestParam long id
     ){
         cityService.deleteCity(id);
-        return new ResponseEntity<>("City successfully deleted", HttpStatus.OK);
+        return new ResponseEntity<>("City deleted successfully...", HttpStatus.OK);
     }
 
     //http://localhost:8080/api/v1/city/update?id=

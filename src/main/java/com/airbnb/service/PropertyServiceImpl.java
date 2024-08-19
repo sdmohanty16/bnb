@@ -9,6 +9,7 @@ import com.airbnb.repository.CityRepository;
 import com.airbnb.repository.CountryRepository;
 import com.airbnb.repository.PropertyRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -51,6 +52,12 @@ public class PropertyServiceImpl implements PropertyService{
     public List<Property> searchProperty(String cityName) {
         List<Property> properties = propertyRepository.searchProperty(cityName);
         return properties;
+    }
+
+    @Override
+    @Transactional
+    public void deleteProperty(long id) {
+        propertyRepository.deleteById(id);
     }
 
 
