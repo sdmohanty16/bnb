@@ -18,12 +18,12 @@ public class PropertyController {
     private PropertyService propertyService;
 
 
-    public PropertyController(PropertyService propertyService, CountryService countryService, CityService cityService) {
+    public PropertyController(PropertyService propertyService) {
         this.propertyService = propertyService;
 
     }
 
-    //http://localhost:8080/api/v1/property/add
+    //http://localhost:8080/api/v1/property/add?cityid= &countryid=
     @PostMapping("/add")
     public ResponseEntity<PropertyDto> addProperty(
             @RequestParam long cityid,
@@ -51,6 +51,21 @@ public class PropertyController {
         return new ResponseEntity<>("Property deleted successfully..." , HttpStatus.OK);
     }
 
+    //http://localhost:8080/api/v1/property/update?id=
+    @PutMapping("/update")
+    public ResponseEntity<PropertyDto> updateProperty(
+            @RequestParam long id,
+            @RequestBody PropertyDto propertyDto
+    ){
+        PropertyDto dto = propertyService.updateProperty(id, propertyDto);
+        return new ResponseEntity<>(dto, HttpStatus.OK);
+    }
 
+    //http://localhost:8080/api/v1/property/getallproperty
+    @GetMapping("/getallproperty")
+    public ResponseEntity <List<PropertyDto>> getAllProperty(){
+        List<PropertyDto> allProperty = propertyService.getAllProperty();
+        return new ResponseEntity<>(allProperty, HttpStatus.OK);
+    }
 
 }

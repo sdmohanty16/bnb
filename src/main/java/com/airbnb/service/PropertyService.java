@@ -12,4 +12,10 @@ public interface PropertyService {
     public List<Property> searchProperty(String cityName);
 
     void deleteProperty(long id);
+
+
+    PropertyDto updateProperty(long id, PropertyDto propertyDto);
+
+
+    List<PropertyDto> getAllProperty();
 }
