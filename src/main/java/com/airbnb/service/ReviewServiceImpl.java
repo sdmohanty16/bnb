@@ -3,17 +3,18 @@ package com.airbnb.service;
 import com.airbnb.entity.AppUser;
 import com.airbnb.entity.Property;
 import com.airbnb.entity.Review;
-import com.airbnb.exception.DescriptionExists;
-import com.airbnb.exception.PropertyExists;
-import com.airbnb.payload.AppUserDto;
-import com.airbnb.payload.PropertyDto;
+import com.airbnb.exception.ReviewExists;
 import com.airbnb.payload.ReviewDto;
 import com.airbnb.repository.AppUserRepository;
 import com.airbnb.repository.PropertyRepository;
 import com.airbnb.repository.ReviewRepository;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ReviewServiceImpl implements ReviewService{
@@ -33,20 +34,25 @@ public class ReviewServiceImpl implements ReviewService{
 
         Optional<Property> opId = propertyRepository.findById(propertyId);
         Property property = opId.get();
+        Review reviewDetails = reviewRepository.findByUserAndProperty(user, property);
+        if(reviewDetails!=null){
+            throw new ReviewExists("Review already exists...");
+        }
         Review review = mapToEntity(reviewDto);
         review.setProperty(property);
         review.setAppUser(user);
-
-        Optional<Review> opDescription = reviewRepository.findByDescription(review.getDescription());
-        if(opDescription.isPresent()){
-            throw new DescriptionExists("Description already exists...");
-        }
 
         Review savedReview = reviewRepository.save(review);
         ReviewDto dto = mapToDto(savedReview);
         return dto;
     }
 
+    @Override
+    public List<ReviewDto> listReviewsOfUser(AppUser user) {
+        List<Review> reviews = reviewRepository.findReviewsByUser(user);
+        List<ReviewDto> collected = reviews.stream().map(r -> mapToDto(r)).collect(Collectors.toList());
+        return collected;
+    }
 
 
     Review mapToEntity(ReviewDto dto){
